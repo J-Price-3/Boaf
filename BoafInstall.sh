@@ -1,5 +1,14 @@
 #!/bin/bash
 
-sudo apt-get install git
+mkdir ~/Dexter
+cd /home/pi/Dexter
+git clone https://github.com/DexterInd/GrovePi
+cd /home/pi/Dexter/GrovePi/Script
+bash ./update_grovepi.sh
+echo "After installation turn off pi and add grove pi attachment"
 
-git clone 
+cd Main
+cd GPS
+gcc -o GPS main.c
+
+echo "Installation complete"
