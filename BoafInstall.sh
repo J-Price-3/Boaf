@@ -9,7 +9,6 @@ bash ./update_grovepi.sh
 echo "After installation turn off pi and add grove pi attachment"
 
 cd
-cd Desktop
 cd Boaf
 cd Main
 cd GPS
