@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir ~/Dexter
-cd /home/pi/Dexter
+cd /home/pi/
 git clone https://github.com/DexterInd/GrovePi
 cd /home/pi/Dexter/GrovePi/Script
 bash ./update_grovepi.sh
