@@ -5,7 +5,7 @@ def GetLatitude():
     ret = file.readlines()
     file.close()
     try:
-        return (ret[0])[0:9]
+        return float((ret[0])[0:9])
     except:
         return -1
 
@@ -14,7 +14,7 @@ def GetLongitude():
     ret = file.readlines()
     file.close()
     try:
-        return (ret[1])[0:9]
+        return float((ret[1])[0:9])
     except:
         return -1
 
@@ -23,4 +23,5 @@ longitude = GetLongitude()
 
 while True:
     print(GetLatitude())
+    print(GetLongitude())
     time.sleep(0.5)
