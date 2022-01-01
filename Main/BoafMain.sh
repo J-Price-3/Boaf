@@ -1,7 +1,5 @@
-#!/bin/bash
+#!/bin/bash -x
 
-source ./BoafMain.sh
+source ./GPS/GPS &
 
-sudo ./GPS/GPS &
-
-python BoafPosition.py &
+source python BoafPosition.py

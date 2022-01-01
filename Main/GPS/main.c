@@ -31,7 +31,7 @@ int main()
       read_GPS_Data(read_buffer);
       parse_GpsDATA();
       if(Save_Data.ParseData_Flag == 1 && Save_Data.Usefull_Flag ==1){
-        set_environment_variables();
+        save_GPS_Data();
         Save_Data.Usefull_Flag=0;
         Save_Data.ParseData_Flag=0;
       }else{

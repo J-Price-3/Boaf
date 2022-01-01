@@ -8,7 +8,7 @@
 
 void read_GPS_Data(char *Gps_Buffer);
 void parse_GpsDATA();
-void print_Save();
+void save_GPS_Data();
 void RST_Buffer(char *Buffer);
 void insert_array(char *buff);
 
@@ -91,26 +91,15 @@ void parse_GpsDATA()
   }
 }
 
-void print_Save()
+void save_GPS_Data() 
 {
-  printf("*****************************************************\n");
-  printf("UTCTime\t\t:[%s]\n",Save_Data.UTCTime);
-  printf("Slatitude\t:[%s]\n",Save_Data.Slatitude);
-  printf("N/S\t\t:[%s]\n",Save_Data.N_S);
-  printf("Slongitude\t:[%s]\n",Save_Data.Slongitude);
-  printf("E/W\t\t:[%s]\n",Save_Data.E_W);
-  insert_array(Save_Data.Slatitude);
-  insert_array(Save_Data.Slongitude);
-  printf("%s,%s\n",Save_Data.Slatitude, Save_Data.Slongitude);
-  printf("*****************************************************\n");
-}
-
-void set_environment_variables() 
-{
-    system(strcat(strcat("export Slatitude='", Save_Data.Slatitude), "'"));
-    system(strcat(strcat("export Slongitude='", Save_Data.Slongitude), "'"));
-    system(strcat(strcat("export NorthSouth='", Save_Data.N_S), "'"));
-    system(strcat(strcat("export EastWest='", Save_Data.E_W), "'"));
+    FILE* saveFile;
+    saveFile = fopen("GPSDATA.txt", "w");
+    fprintf(saveFile, strcat(Save_Data.Slatitude, "\n"));
+    fprintf(saveFile, strcat(Save_Data.Slongitude, "\n"));
+    fprintf(saveFile, strcat(Save_Data.N_S, "\n"));
+    fprintf(saveFile, strcat(Save_Data.E_W, "\n"));
+    fclose(saveFile);
 }
 
 void RST_Buffer(char *Buffer)
