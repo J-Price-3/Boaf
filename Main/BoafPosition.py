@@ -5,7 +5,7 @@ def GetLatitude():
     ret = file.readlines()
     file.close()
     try:
-        print(ret[2])
+        print(ret)
         return float((ret[0])[0:9])
     except:
         return 0
