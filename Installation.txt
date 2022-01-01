@@ -1,0 +1,2 @@
+navigate to Boaf folder
+use "bash BoafInstall.sh"
