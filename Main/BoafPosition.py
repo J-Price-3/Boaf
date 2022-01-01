@@ -1,7 +1,9 @@
 import os
 
-print(os.environ.get("GPSTEST"))
-os.environ.get("Slatitude")
-os.environ.get('Slongitude')
-os.environ.get('NorthSouth')
-os.environ.get('EastWest')
+def GetLatitude():
+    file = open("GPSDATA.txt", "r")
+    return file.readline()
+
+file = open("GPSDATA.txt", "r")
+while True:
+    print(file.readline())
