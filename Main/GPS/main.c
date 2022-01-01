@@ -2,7 +2,7 @@
 
 #include "com.h"
 #include "gps.h"
-
+#include <unistd.h>
 
 int fd;
 char read_buffer[BUFFER_SIZE];
@@ -39,6 +39,8 @@ int main()
         printf("GPS Error\n");
       }
     }
+
+    sleep(0.5);
   }
   close(fd);
   return 1;
