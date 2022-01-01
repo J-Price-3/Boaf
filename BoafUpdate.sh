@@ -14,4 +14,10 @@ cd Main
 cd GPS
 gcc -o GPS main.c
 
+cd
+cd Desktop
+cd Boaf
+cd Main
+chmod u+x BoafMain.sh
+
 echo "Installation complete"

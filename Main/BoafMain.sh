@@ -1,5 +1,5 @@
-#!/bin/bash -x
+#!/bin/bash
 
-source ./GPS/GPS &
+./GPS/GPS &
 
-source python BoafPosition.py
+python BoafPosition.py
