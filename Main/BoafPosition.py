@@ -4,13 +4,19 @@ def GetLatitude():
     file = open("GPSDATA.txt", "r")
     ret = file.readlines()
     file.close()
-    return ret[0]
+    try:
+        return (ret[0])[0:9]
+    except:
+        return -1
 
 def GetLongitude():
     file = open("GPSDATA.txt", "r")
     ret = file.readlines()
     file.close()
-    return ret[1]
+    try:
+        return (ret[1])[0:9]
+    except:
+        return -1
 
 latitude = GetLatitude()
 longitude = GetLongitude()
