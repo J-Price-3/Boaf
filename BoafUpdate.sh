@@ -20,4 +20,4 @@ cd Boaf
 cd Main
 chmod u+x BoafMain.sh
 
-echo "Installation complete"
+echo "Update complete"
