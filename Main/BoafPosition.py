@@ -2,10 +2,12 @@ import os, time
 
 def GetLatitude():
     file = open("GPSDATA.txt", "r")
-    return file.readline()
+    ret = file.readlines()
+    file.close()
+    return ret
 
 
-file = open("GPSDATA.txt", "r")
+
 while True:
-    print(file.read())
-    time.sleep(1)
+    print(GetLatitude())
+    time.sleep(5)
