@@ -20,6 +20,9 @@ int main()
     perror("set_com_config"); 
     return 1; 
   }
+
+  system("export GPSTEST='yo'");
+
   while (1) {
     memset(read_buffer,0, BUFFER_SIZE);
     read_buffer_size= read_Buffer(fd, read_buffer);
@@ -33,6 +36,7 @@ int main()
         Save_Data.ParseData_Flag=0;
       }else{
         //maybe give some kind of failure indication
+        printf("GPS Error\n");
       }
     }
   }
