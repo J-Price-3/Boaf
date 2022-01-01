@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd
 cd Desktop
 rm -r Boaf
 git clone https://github.com/Logang2/Boaf.git
