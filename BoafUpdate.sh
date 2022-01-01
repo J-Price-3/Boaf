@@ -3,6 +3,8 @@
 cd
 cd Desktop
 rm -r -f Boaf
+cd
+cd Desktop
 git clone https://github.com/Logang2/Boaf.git
 
 cd
