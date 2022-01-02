@@ -1,28 +1,53 @@
 import os, time
 
-def GetLatitude():
+longitude = 0
+latitude = 0
+
+
+def SetLatitude():
     file = open("GPSDATA.txt", "r")
     ret = file.readlines()
     file.close()
     try:
-        print(ret)
-        return float((ret[0])[0:9])
+        latitude = float((ret[0])[1:10])
+        ns = 1
+        try:
+            if((ret[2])[1] == "N"):
+                ns = 1
+            else:
+                ns = -1
+            latitude = ns * latitude
+        except:
+            return False
+        return True
     except:
-        return 0
+        return False
 
-def GetLongitude():
+def SetLongitude():
     file = open("GPSDATA.txt", "r")
     ret = file.readlines()
     file.close()
     try:
-        return float((ret[1])[0:9])
+        longitude = float((ret[1])[1:10])
+        ew = 1
+        try:
+            if((ret[3])[1] == "E"):
+                ew = 1
+            else:
+                ew = -1
+            longitude = ew * longitude
+        except:
+            return False
+        return True
     except:
-        return 0
+        return False
 
-latitude = GetLatitude()
-longitude = GetLongitude()
+SetLatitude()
+SetLongitude()
 
 while True:
-    print(GetLatitude())
-    print(GetLongitude())
+    SetLatitude()
+    SetLongitude()
+    print(latitude)
+    print(longitude)
     time.sleep(0.5)
