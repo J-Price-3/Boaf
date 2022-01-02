@@ -4,50 +4,57 @@ longitude = 0
 latitude = 0
 
 
-def SetLatitude():
-    file = open("GPSDATA.txt", "r")
-    ret = file.readlines()
-    file.close()
-    try:
-        latitude = float((ret[0])[1:10])
-        ns = 1
+class PositionReader():
+    def __init__(self):
+        self.latitude = 0
+        self.longitude = 0
+        self.timeSince = 0
+    
+    def SetLatitude(self):
+        file = open("GPSDATA.txt", "r")
+        ret = file.readlines()
+        file.close()
         try:
-            if((ret[2])[1] == "N"):
-                ns = 1
-            else:
-                ns = -1
-            latitude = ns * latitude
+            self.latitude = float((ret[0])[0:10])
+            ns = 1
+            try:
+                if((ret[2])[0] == "N"):
+                    ns = 1
+                else:
+                    ns = -1
+                self.latitude = ns * self.latitude
+            except:
+                return False
+            return True
         except:
             return False
-        return True
-    except:
-        return False
-
-def SetLongitude():
-    file = open("GPSDATA.txt", "r")
-    ret = file.readlines()
-    file.close()
-    try:
-        longitude = float((ret[1])[1:10])
-        ew = 1
+    
+    def SetLongitude(self):
+        file = open("GPSDATA.txt", "r")
+        ret = file.readlines()
+        file.close()
         try:
-            if((ret[3])[1] == "E"):
-                ew = 1
-            else:
-                ew = -1
-            longitude = ew * longitude
+            self.longitude = float((ret[1])[0:10])
+            ew = 1
+            try:
+                if((ret[3])[0] == "E"):
+                    ew = 1
+                else:
+                    ew = -1
+                self.longitude = ew * self.longitude
+            except:
+                return False
+            return True
         except:
             return False
-        return True
-    except:
-        return False
 
-SetLatitude()
-SetLongitude()
+    def Update(self, deltaT):
+        self.timeSince += deltaT
+        if(self.timeSince >= 0.5):
+            self.SetLatitude()
+            self.SetLongitude()
+            self.timeSince = 0
+    
 
-while True:
-    SetLatitude()
-    SetLongitude()
-    print(latitude)
-    print(longitude)
-    time.sleep(0.5)
+
+
