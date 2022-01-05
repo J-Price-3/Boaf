@@ -38,14 +38,14 @@ class tdsReader():
         for i in range(0, int(self.timeSpan // self.measureInterval)):
             self.measurements.append(0)
         
-    def update(self, t):
+    def Update(self, t):
         self.timeSinceMeasurement += t
         if (self.timeSinceMeasurement >= self.measureInterval):
             self.measurements.append(tdsRead())
             self.measurements.pop(0)
             self.timeSinceMeasurement = 0
             
-    def getMovingAverage(self):
+    def GetMovingAverage(self):
         total = 0
         for value in self.measurements:
             total += value
@@ -60,14 +60,14 @@ class turbidityReader():
         for i in range(0, int(self.timeSpan // self.measureInterval)):
             self.measurements.append(0)
         
-    def update(self, t):
+    def Update(self, t):
         self.timeSinceMeasurement += t
         if (self.timeSinceMeasurement >= self.measureInterval):
             self.measurements.append(turbidityRead())
             self.measurements.pop(0)
             self.timeSinceMeasurement = 0
             
-    def getMovingAverage(self):
+    def GetMovingAverage(self):
         total = 0
         for value in self.measurements:
             total += value
@@ -82,14 +82,14 @@ class phReader():
         for i in range(0, int(self.timeSpan // self.measureInterval)):
             self.measurements.append(0)
         
-    def update(self, t):
+    def Update(self, t):
         self.timeSinceMeasurement += t
         if (self.timeSinceMeasurement >= self.measureInterval):
             self.measurements.append(phRead())
             self.measurements.pop(0)
             self.timeSinceMeasurement = 0
             
-    def getMovingAverage(self):
+    def GetMovingAverage(self):
         total = 0
         for value in self.measurements:
             total += value
