@@ -29,7 +29,7 @@ def phRead():
     phValue = K * voltage + OFFSET
     return phValue
 
-class tdsReader():
+class TdsReader():
     def __init__(self):
         self.timeSpan = 10
         self.measureInterval = 0.5
@@ -51,7 +51,7 @@ class tdsReader():
             total += value
         return total / len(self.measurements)
 
-class turbidityReader():
+class TurbidityReader():
     def __init__(self):
         self.timeSpan = 10
         self.measureInterval = 0.5
@@ -73,7 +73,7 @@ class turbidityReader():
             total += value
         return total / len(self.measurements)
     
-class phReader():
+class PhReader():
     def __init__(self):
         self.timeSpan = 10
         self.measureInterval = 0.5

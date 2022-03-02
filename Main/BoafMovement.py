@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-import time
+import time, math
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(33, GPIO.OUT)
@@ -22,4 +22,21 @@ class Rudder:
         self.rudder.stop()
         GPIO.cleanup()
 
-rudder = Rudder()
+def dot(v1,v2):
+    theta=math.acos((v1[0]*v2[0]+v1[1]*v2[1])/math.sqrt((v1[0]**2+v1[1]**2)*(v2[0]**2+v2[1]**2)))
+    return theta
+
+def turny_boi(rudder, posReader, nextNode):#vectors are of form x,y       current and target are the velocity vector and then the velocity that it must become
+    target = [nextNode[0] - posReader.GetPosition()[0], nextNode[0] - posReader.GetPosition()[0]]
+
+    pleft=[-posReader.GetVelocity()[1],posReader.GetVelocity()[0]]#perpendicular vectors left and right
+    pright=[posReader.GetVelocity()[1],-posReader.GetVelocity()[0]]
+
+    left=dot(pleft,target)
+    right=dot(pright,target)
+
+    if left<right and (right-left) > 0.08:
+        rudder.setAngle(-70)
+
+    if right>left and (left-right) > 0.08:
+        rudder.setAngle(70)
