@@ -15,7 +15,7 @@ class Pathfinder():
         self.visited = []
         self.toVisit = []
         self.currentRoundedCoords = [0, 0]
-        self.currentNode = Node(0, 0, None)
+        self.currentNode = Node([0, 0], None)
 
     def NodeStatus(self, nodeCoords):
         for i in range(len(self.visited)):
@@ -60,6 +60,8 @@ class Pathfinder():
             self.currentNode = None
 
     def Backtrack(self):
+        self.currentNode.visited = True
+        self.visited.append(self.currentNode)
         self.currentNode = self.currentNode.parent
 
     def Update(self):
