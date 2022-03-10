@@ -9,9 +9,9 @@ class Node():
         self.visited = False
 
 class Pathfinder():
-    def __init__(self, posReader, depthReader):
+    def __init__(self, posReader, obstacleDetector):
         self.posReader = posReader
-        self.depthReader = depthReader
+        self.obstacleDetector = obstacleDetector
         self.visited = []
         self.toVisit = []
         self.currentRoundedCoords = [0, 0]
@@ -65,7 +65,7 @@ class Pathfinder():
         self.currentNode = self.currentNode.parent
 
     def Update(self):
-        if(self.depthReader.GetDepth() < 0.2):
+        if(not self.obstacleDetector.valid):
             self.Backtrack()
         elif(self.posReader.GetDistance([self.currentNode.xPos, self.currentNode.yPos]) < 0.1):
             self.Pathfind()

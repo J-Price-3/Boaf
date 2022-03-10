@@ -1,11 +1,9 @@
 import RPi.GPIO as GPIO
 import time, math
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(33, GPIO.OUT)
-
 class Rudder:
     def __init__(self):
+        GPIO.setup(33, GPIO.OUT)
         self.rudder = GPIO.PWM(33, 50)
         self.duty = 0
         self.setAngle(0)
@@ -21,6 +19,40 @@ class Rudder:
     def endRudder(self):
         self.rudder.stop()
         GPIO.cleanup()
+
+class Propellor:
+    def __init__(self):
+        self.inOne = 18
+        self.inTwo = 16
+        self.en = 22
+        GPIO.setup(self.inOne, GPIO.OUT)
+        GPIO.setup(self.inTwo, GPIO.OUT)
+        GPIO.setup(self.en, GPIO.OUT)
+        GPIO.output(self.inOne, GPIO.LOW)
+        GPIO.output(self.inTwo, GPIO.LOW)
+        self.p = GPIO.PWM(self.en, 1000)
+    
+    def stop(self):
+        GPIO.output(self.inOne, GPIO.LOW)
+        GPIO.output(self.inTwo, GPIO.LOW)
+
+    def forward(self):
+        GPIO.output(self.inOne, GPIO.HIGH)
+        GPIO.output(self.inTwo, GPIO.LOW)
+    
+    def backward(self):
+        GPIO.output(self.inOne, GPIO.LOW)
+        GPIO.output(self.inTwo, GPIO.HIGH)
+
+    def setSpeed(self, speed):
+        #speed is -100 to 100
+        if(speed < 0):
+            speed = -speed
+            self.backward()
+        else:
+            self.forward()
+        self.p.ChangeDutyCycle(speed)
+
 
 def dot(v1,v2):
     theta=math.acos((v1[0]*v2[0]+v1[1]*v2[1])/math.sqrt((v1[0]**2+v1[1]**2)*(v2[0]**2+v2[1]**2)))

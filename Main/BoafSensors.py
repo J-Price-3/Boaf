@@ -1,4 +1,5 @@
 import grovepi, time
+import RPi.GPIO as GPIO
 
 #############################################
 ##
@@ -94,3 +95,17 @@ class PhReader():
         for value in self.measurements:
             total += value
         return total / len(self.measurements)
+
+class ObstacleDetector():
+    def __init__(self):
+        GPIO.setup(40, GPIO.IN)
+        self.valid = True
+        self.measureInterval = 0.1
+        self.timeSinceMeasurement = 0
+
+    def Update(self, t):
+        self.timeSinceMeasurement += t
+        if(self.timeSinceMeasurement >= self.measureInterval):
+            self.valid = False
+            if(GPIO.input(40) == 0):
+                self.valid = True

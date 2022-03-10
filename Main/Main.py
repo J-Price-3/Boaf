@@ -1,17 +1,21 @@
 import BoafSensors, BoafPosition, BoafMovement, BoafPathfinding
 import csv
 from datetime import datetime
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BOARD)
 
 phReader = BoafSensors.PhReader()
 tdsReader = BoafSensors.TdsReader()
 turbidityReader = BoafSensors.TurbidityReader()
-#depthReader = BoafSensors.DepthReader()
+obstacleDetector = BoafSensors.ObstacleDetector()
 
 positionReader = BoafPosition.PositionReader()
 
-pathfinder = BoafPathfinding.Pathfinder(positionReader, depthReader)
+pathfinder = BoafPathfinding.Pathfinder(positionReader, obstacleDetector)
 
-rudder =BoafMovement.Rudder()
+rudder = BoafMovement.Rudder()
+propeller = BoafMovement.Propellor()
 
 #### Initialise ####
 
@@ -49,15 +53,11 @@ def Update(increment):
 
 #### Do Measurements ####
 
+propeller.setSpeed(100)
+
 while not pathfinder.Done():
     Update(0.1)
 
 ####/Do Measurements/####
 
-
-
-#### Return To Shore ####
-
-#do something
-
-####/Return To Shore/####
+propeller.stop()
