@@ -31,6 +31,7 @@ class Propellor:
         GPIO.output(self.inOne, GPIO.LOW)
         GPIO.output(self.inTwo, GPIO.LOW)
         self.p = GPIO.PWM(self.en, 1000)
+        self.p.start(0)
     
     def stop(self):
         GPIO.output(self.inOne, GPIO.LOW)

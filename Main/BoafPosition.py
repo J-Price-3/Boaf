@@ -55,7 +55,7 @@ class PositionReader():
 
     #(N/S, E/W) (m/s)
     def GetVelocity(self):
-        sum = (0, 0)
+        sum = [0, 0]
         for v in self.velocities:
             sum[0] += v[0]
             sum[1] += v[1]

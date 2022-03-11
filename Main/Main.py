@@ -24,13 +24,13 @@ propeller = BoafMovement.Propellor()
 
 #create writing files#
 now = datetime.now()
-phFile = open("PH"+now.strftime("%d/%m/%Y %H:%M:%S")+".csv", "w")
+phFile = open("PH"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
 phWriter = csv.writer(phFile)
 
-tdsFile = open("TDS"+now.strftime("%d/%m/%Y %H:%M:%S")+".csv", "w")
+tdsFile = open("TDS"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
 tdsWriter = csv.writer(tdsFile)
 
-turbidityFile = open("Turbidity"+now.strftime("%d/%m/%Y %H:%M:%S")+".csv", "w")
+turbidityFile = open("Turbidity"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
 turbidityWriter = csv.writer(turbidityFile)
 #/create writing files/#
 
@@ -82,33 +82,33 @@ def SystemCheck():
     input("enter to continue")
     print("testing positon reader")
     t = 0
-    while t < 10:
+    while t < 100:
         positionReader.Update(0.1)
-        time.sleep(0.1)
+        time.sleep(1)
         t += 0.1
-        if(t % 1 == 0):
-            print("pos:" + positionReader.GetPosition())
-            print("vel:" + positionReader.GetVelocity())
+        if(t % 10 == 0):
+            print("pos:" + str(positionReader.GetPosition()))
+            print("vel:" + str(positionReader.GetVelocity()))
     input("enter to continue")
     print("testing sensors")
     t = 0
-    while t < 10:
+    while t < 100:
         phReader.Update(0.1)
         tdsReader.Update(0.1)
         turbidityReader.Update(0.1)
         time.sleep(0.1)
-        t += 0.1
-        if(t % 1 == 0):
-            print("ph:" + phReader.GetMovingAverage())
-            print("tds:" + tdsReader.GetMovingAverage()())
-            print("turb:" + turbidityReader.GetMovingAverage()())
+        t += 1
+        if(t % 10 == 0):
+            print("ph:" + str(phReader.GetMovingAverage()))
+            print("tds:" + str(tdsReader.GetMovingAverage()))
+            print("turb:" + str(turbidityReader.GetMovingAverage()))
     input("enter to continue")
     print("testing laser")
-    while t < 10:
+    while t < 100:
         obstacleDetector.Update(0.1)
         time.sleep(0.1)
-        t += 0.1
-        if(t % 1 == 0):
-            print("obstacle:" + obstacleDetector.valid)
+        t += 1
+        if(t % 10 == 0):
+            print("obstacle:" + str(obstacleDetector.valid))
     input("enter to continue")    
 
