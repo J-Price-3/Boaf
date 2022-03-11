@@ -84,8 +84,8 @@ def SystemCheck():
     t = 0
     while t < 100:
         positionReader.Update(0.1)
-        time.sleep(1)
-        t += 0.1
+        time.sleep(0.1)
+        t += 1
         if(t % 10 == 0):
             print("pos:" + str(positionReader.GetPosition()))
             print("vel:" + str(positionReader.GetVelocity()))
