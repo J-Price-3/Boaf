@@ -13,7 +13,7 @@ int main()
 {
   
   //Open the serial port
-  fd = open_port("/dev/ttyACM1");
+  fd = open_port("/dev/ttyACM0");
   //Set up the serial port
   if(set_com_config(fd, 115200, 8, 'N', 1) < 0) //Configure the serial port 
   { 
