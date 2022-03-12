@@ -11,7 +11,7 @@ class PositionReader():
         self.timeSince = 0
     
     def SetLatitude(self):
-        file = open("GPSDATA.txt", "r")
+        file = open("GPS/GPSDATA.txt", "r")
         ret = file.readlines()
         file.close()
         try:
@@ -33,7 +33,7 @@ class PositionReader():
             return False
     
     def SetLongitude(self):
-        file = open("GPSDATA.txt", "r")
+        file = open("GPS/GPSDATA.txt", "r")
         ret = file.readlines()
         file.close()
         try:
@@ -46,7 +46,7 @@ class PositionReader():
                 else:
                     ew = -1
                 self.longitude = ew * self.longitude
-                self.velocities[len(self.velocities) - 1][1] = 111320 * (math.cos(self.latitude * math.pi / 180) * self.longitude - math.cos(self.lastLat * math.pi / 180) * lastLong) / self.timeSince
+                self.velocities[len(self.velocities) - 1][1] = 111320 * (math.din(self.latitude * math.pi / 180) * self.longitude - math.sin(self.lastLat * math.pi / 180) * lastLong) / self.timeSince
             except:
                 return False
             return True
@@ -65,7 +65,7 @@ class PositionReader():
 
     #(N/S, E/W) (m) (relative to centre)
     def GetPosition(self):
-        return (111320 * (self.latitude - self.centre[0]), 111320 * (self.longitude * math.cos(self.latitude * math.pi / 180) - self.centre[1]* math.cos(self.centre[0] * math.pi / 180)))
+        return (111320 * (self.latitude - self.centre[0]), 111320 * (self.longitude * math.sin(self.latitude * math.pi / 180) - self.centre[1]* math.sin(self.centre[0] * math.pi / 180)))
 
     #distance (m)
     def GetDistance(self, position):
@@ -78,7 +78,6 @@ class PositionReader():
             if(self.SetLatitude()):
                 if(self.SetLongitude()):
                     self.timeSince = 0
-    
 
 
 

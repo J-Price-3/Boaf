@@ -24,13 +24,13 @@ propeller = BoafMovement.Propellor()
 
 #create writing files#
 now = datetime.now()
-phFile = open("PH"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
+phFile = open("results/PH"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
 phWriter = csv.writer(phFile)
 
-tdsFile = open("TDS"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
+tdsFile = open("results/TDS"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
 tdsWriter = csv.writer(tdsFile)
 
-turbidityFile = open("Turbidity"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
+turbidityFile = open("results/Turbidity"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
 turbidityWriter = csv.writer(turbidityFile)
 #/create writing files/#
 
@@ -104,6 +104,7 @@ def SystemCheck():
             print("turb:" + str(turbidityReader.GetMovingAverage()))
     input("enter to continue")
     print("testing laser")
+    t=0
     while t < 100:
         obstacleDetector.Update(0.1)
         time.sleep(0.1)
