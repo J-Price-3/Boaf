@@ -46,7 +46,7 @@ class PositionReader():
                 else:
                     ew = -1
                 self.longitude = ew * self.longitude
-                self.velocities[len(self.velocities) - 1][1] = 111320 * (math.din(self.latitude * math.pi / 180) * self.longitude - math.sin(self.lastLat * math.pi / 180) * lastLong) / self.timeSince
+                self.velocities[len(self.velocities) - 1][1] = 111320 * (math.sin(self.latitude * math.pi / 180) * self.longitude - math.sin(self.lastLat * math.pi / 180) * lastLong) / self.timeSince
             except:
                 return False
             return True

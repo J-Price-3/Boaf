@@ -13,6 +13,8 @@ turbidityReader = BoafSensors.TurbidityReader()
 obstacleDetector = BoafSensors.ObstacleDetector()
 
 positionReader = BoafPosition.PositionReader()
+positionReader.Update(0.6)
+positionReader.centre = (positionReader.latitude, positionReader.longitude)
 
 pathfinder = BoafPathfinding.Pathfinder(positionReader, obstacleDetector)
 
@@ -24,17 +26,15 @@ propeller = BoafMovement.Propellor()
 
 #create writing files#
 now = datetime.now()
-phFile = open("results/PH"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
+phFile = open("results/"+now.strftime("%d-%m-%Y %H:%M:%S")+"/PH.csv", "w")
 phWriter = csv.writer(phFile)
 
-tdsFile = open("results/TDS"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
+tdsFile = open("results/"+now.strftime("%d-%m-%Y %H:%M:%S")+"/TDS.csv", "w")
 tdsWriter = csv.writer(tdsFile)
 
-turbidityFile = open("results/Turbidity"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
+turbidityFile = open("results/"+now.strftime("%d-%m-%Y %H:%M:%S")+"/Turbidity.csv", "w")
 turbidityWriter = csv.writer(turbidityFile)
 #/create writing files/#
-
-done = False
 
 #### /Initialise/ ####
 
@@ -113,3 +113,4 @@ def SystemCheck():
             print("obstacle:" + str(obstacleDetector.valid))
     input("enter to continue")    
 
+Run()
