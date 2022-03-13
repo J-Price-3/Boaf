@@ -2,7 +2,7 @@
 
 echo "install dexter? y/n"
 read dexterinstall
-if ["$dexterinstall" = "y"]; then
+if ["$dexterinstall" = "${dexterinstall[Yy]}"]; then
     cd /home/pi/
     mkdir Dexter
     cd Dexter
@@ -19,8 +19,8 @@ gcc -o GPS main.c
 
 cd
 cd Desktop/Boaf/Main
-cp 98_acm.rules /etc/udev/rules.d/
+sudo cp 98_acm.rules /etc/udev/rules.d/
 sudo rm /etc/rc.local
-cp rc.local /etc/
+sudo cp rc.local /etc/
 
 echo "Installation complete"
