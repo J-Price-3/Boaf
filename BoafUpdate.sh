@@ -20,6 +20,7 @@ cd Boaf
 cd Main
 chmod u+x BoafMain.sh
 
+cd GPS
 touch GPSDATA.txt
 
 echo "Update complete"
