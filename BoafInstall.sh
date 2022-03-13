@@ -2,7 +2,7 @@
 
 echo "install dexter? y/n"
 read dexterinstall
-if ["$dexterinstall" = "${dexterinstall[Yy]}"]; then
+if ["$dexterinstall" == "${dexterinstall[Yy]}"]; then
     cd /home/pi/
     mkdir Dexter
     cd Dexter
