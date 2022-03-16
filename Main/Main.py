@@ -21,22 +21,10 @@ pathfinder = BoafPathfinding.Pathfinder(positionReader, obstacleDetector)
 rudder = BoafMovement.Rudder()
 propeller = BoafMovement.Propellor()
 
-#### Initialise ####
-
-
-#create writing files#
 now = datetime.now()
-phFile = open("results/"+now.strftime("%d-%m-%Y %H:%M:%S")+"/PH.csv", "w")
-phWriter = csv.writer(phFile)
-
-tdsFile = open("results/"+now.strftime("%d-%m-%Y %H:%M:%S")+"/TDS.csv", "w")
-tdsWriter = csv.writer(tdsFile)
-
-turbidityFile = open("results/"+now.strftime("%d-%m-%Y %H:%M:%S")+"/Turbidity.csv", "w")
-turbidityWriter = csv.writer(turbidityFile)
-#/create writing files/#
-
-#### /Initialise/ ####
+file = open("results/"+now.strftime("%d-%m-%Y %H:%M:%S")+"/results.csv", "w")
+writer = csv.writer(file)
+writer.writerow(["X", "Y", "PH", "TDS", "TURBIDITY"])
 
 #use increments of 0.1s
 def Update(increment):
@@ -49,7 +37,9 @@ def Update(increment):
 
     BoafMovement.turny_boi(rudder, positionReader, pathfinder.currentNode)
 
-    pathfinder.Update()
+    check = pathfinder.Update()
+    if(check):
+        writer.writerow([check[0], check[1], phReader.GetMovingAverage(), tdsReader.GetMovingAverage(), turbidityReader.GetMovingAverage()])
 
 
 def Run():

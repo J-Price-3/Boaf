@@ -65,10 +65,14 @@ class Pathfinder():
         self.currentNode = self.currentNode.parent
 
     def Update(self):
+        lastnode = [self.currentNode.xPos, self.currentNode.yPos]
         if(not self.obstacleDetector.valid):
             self.Backtrack()
+            return False
         elif(self.posReader.GetDistance([self.currentNode.xPos, self.currentNode.yPos]) < 0.1):
             self.Pathfind()
+            return lastnode
+        return False
     
     def Done(self):
         if(self.currentNode == None):

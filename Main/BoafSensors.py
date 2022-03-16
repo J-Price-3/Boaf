@@ -1,5 +1,7 @@
 import grovepi, time
 import RPi.GPIO as GPIO
+from datetime import datetime
+import csv
 
 #############################################
 ##
@@ -51,7 +53,7 @@ class TdsReader():
         for value in self.measurements:
             total += value
         return total / len(self.measurements)
-
+    
 class TurbidityReader():
     def __init__(self):
         self.timeSpan = 10
