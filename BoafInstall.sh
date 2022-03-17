@@ -23,6 +23,6 @@ cd Desktop/Boaf/Main
 sudo cp 98_acm.rules /etc/udev/rules.d/
 sudo rm /etc/rc.local
 sudo cp rc.local /etc/
-sudo chmod += /etc/rc.local
+sudo chmod +x /etc/rc.local
 
 echo "Installation complete"
