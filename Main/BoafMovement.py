@@ -3,6 +3,7 @@ import time, math
 
 class Rudder:
     def __init__(self):
+        GPIO.setmode(GPIO.BOARD)
         GPIO.setup(33, GPIO.OUT)
         self.rudder = GPIO.PWM(33, 50)
         self.duty = 0
@@ -11,7 +12,8 @@ class Rudder:
         self.update()
     
     def setAngle(self, angle):
-        self.duty = angle/20 + 7.5
+        self.duty = angle/36 + 7.5
+        self.update()
     
     def update(self):
         self.rudder.ChangeDutyCycle(self.duty)
@@ -25,6 +27,7 @@ class Propellor:
         self.inOne = 18
         self.inTwo = 16
         self.en = 22
+        GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.inOne, GPIO.OUT)
         GPIO.setup(self.inTwo, GPIO.OUT)
         GPIO.setup(self.en, GPIO.OUT)

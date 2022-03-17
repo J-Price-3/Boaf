@@ -22,10 +22,10 @@ rudder = BoafMovement.Rudder()
 propeller = BoafMovement.Propellor()
 
 now = datetime.now()
-file = open("results/"+now.strftime("%d-%m-%Y %H:%M:%S")+"/results.csv", "w")
+file = open("results/"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
 writer = csv.writer(file)
 writer.writerow(["X", "Y", "PH", "TDS", "TURBIDITY"])
-
+file.close()
 #use increments of 0.1s
 def Update(increment):
     
@@ -39,16 +39,19 @@ def Update(increment):
 
     check = pathfinder.Update()
     if(check):
+        file = open("results/"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
         writer.writerow([check[0], check[1], phReader.GetMovingAverage(), tdsReader.GetMovingAverage(), turbidityReader.GetMovingAverage()])
+        file.close()
 
 
 def Run():
     #### Do Measurements ####
-
+    t = 0
     propeller.setSpeed(100)
-
-    while not pathfinder.Done():
+    
+    while not pathfinder.Done() and t <= 30:
         Update(0.1)
+        t+=0.1
 
     ####/Do Measurements/####
     propeller.stop()
@@ -61,46 +64,18 @@ def SystemCheck():
     print("motor stopped")
     input("enter to continue")
     rudder.setAngle(0)
+    rudder.update()
     print("rudder to 0")
     time.sleep(3)
     print("rudder to 90")
     rudder.setAngle(90)
+    rudder.update()
     time.sleep(3)
     print("rudder to -90")
     rudder.setAngle(-90)
+    rudder.update()
     time.sleep(3)
-    input("enter to continue")
-    print("testing positon reader")
-    t = 0
-    while t < 100:
-        positionReader.Update(0.1)
-        time.sleep(0.1)
-        t += 1
-        if(t % 10 == 0):
-            print("pos:" + str(positionReader.GetPosition()))
-            print("vel:" + str(positionReader.GetVelocity()))
-    input("enter to continue")
-    print("testing sensors")
-    t = 0
-    while t < 100:
-        phReader.Update(0.1)
-        tdsReader.Update(0.1)
-        turbidityReader.Update(0.1)
-        time.sleep(0.1)
-        t += 1
-        if(t % 10 == 0):
-            print("ph:" + str(phReader.GetMovingAverage()))
-            print("tds:" + str(tdsReader.GetMovingAverage()))
-            print("turb:" + str(turbidityReader.GetMovingAverage()))
-    input("enter to continue")
-    print("testing laser")
-    t=0
-    while t < 100:
-        obstacleDetector.Update(0.1)
-        time.sleep(0.1)
-        t += 1
-        if(t % 10 == 0):
-            print("obstacle:" + str(obstacleDetector.valid))
-    input("enter to continue")    
 
+SystemCheck()
+time.sleep(100)
 Run()
