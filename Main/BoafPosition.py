@@ -11,12 +11,12 @@ class PositionReader():
         self.timeSince = 0
     
     def SetLatitude(self):
-        file = open("GPS/GPSDATA.txt", "r")
+        file = open("GPSDATA.txt", "r")
         ret = file.readlines()
         file.close()
         try:
             self.lastLat = self.latitude
-            self.latitude = float((ret[0])[0:10])
+            self.latitude = float((ret[0])[0:2] + ((ret[0])[3:5] + (ret[0])[5:10] / 60) / 60)
             ns = 1
             try:
                 if((ret[2])[0] == "N"):
@@ -38,7 +38,7 @@ class PositionReader():
         file.close()
         try:
             lastLong = self.longitude
-            self.longitude = float((ret[1])[0:10])
+            self.longitude = float((ret[1])[0:2] + ((ret[1])[3:5] + (ret[1])[5:10] / 60) / 60)
             ew = 1
             try:
                 if((ret[3])[0] == "E"):
