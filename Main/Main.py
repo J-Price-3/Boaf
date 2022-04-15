@@ -39,7 +39,7 @@ def Update(increment):
 
     check = pathfinder.Update()
     if(check):
-        file = open("results/"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "w")
+        file = open("results/"+now.strftime("%d-%m-%Y %H:%M:%S")+".csv", "a")
         writer.writerow([check[0], check[1], phReader.GetMovingAverage(), tdsReader.GetMovingAverage(), turbidityReader.GetMovingAverage()])
         file.close()
 

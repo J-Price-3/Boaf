@@ -37,21 +37,21 @@ class Pathfinder():
 
         self.currentRoundedCoords = self.RoundCoords(self.posReader.GetPosition())
 
-        status = self.NodeStatus([self.currentRoundedCoords[0]+1,self.currentRoundedCoords[1]])
+        status = self.NodeStatus([self.currentRoundedCoords[0]+5,self.currentRoundedCoords[1]])
         if (status == 0):
-            self.toVisit.append(Node([self.currentRoundedCoords[0]+1,self.currentRoundedCoords[1]], self.currentNode))
+            self.toVisit.append(Node([self.currentRoundedCoords[0]+5,self.currentRoundedCoords[1]], self.currentNode))
         
-        status = self.NodeStatus([self.currentRoundedCoords[0]-1,self.currentRoundedCoords[1]])
+        status = self.NodeStatus([self.currentRoundedCoords[0]-5,self.currentRoundedCoords[1]])
         if (status == 0):
-            self.toVisit.append(Node([self.currentRoundedCoords[0]-1,self.currentRoundedCoords[1]], self.currentNode))
+            self.toVisit.append(Node([self.currentRoundedCoords[0]-5,self.currentRoundedCoords[1]], self.currentNode))
 
-        status = self.NodeStatus([self.currentRoundedCoords[0],self.currentRoundedCoords[1]+1])
+        status = self.NodeStatus([self.currentRoundedCoords[0],self.currentRoundedCoords[1]+5])
         if (status == 0):
-            self.toVisit.append(Node([self.currentRoundedCoords[0],self.currentRoundedCoords[1]+1], self.currentNode))
+            self.toVisit.append(Node([self.currentRoundedCoords[0],self.currentRoundedCoords[1]+5], self.currentNode))
 
-        status = self.NodeStatus([self.currentRoundedCoords[0],self.currentRoundedCoords[1]-1])
+        status = self.NodeStatus([self.currentRoundedCoords[0],self.currentRoundedCoords[1]-5])
         if (status == 0):
-            self.toVisit.append(Node([self.currentRoundedCoords[0],self.currentRoundedCoords[1]-1], self.currentNode))
+            self.toVisit.append(Node([self.currentRoundedCoords[0],self.currentRoundedCoords[1]-5], self.currentNode))
         
         try:
             self.currentNode = self.toVisit[len(self.toVisit)-1]
